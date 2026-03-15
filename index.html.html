@@ -30,34 +30,21 @@
         }
     </script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .font-display {
-            font-family: 'Playfair Display', serif;
-        }
+        body { font-family: 'Inter', sans-serif; }
+        .font-display { font-family: 'Playfair Display', serif; }
         .cart-sidebar {
             transform: translateX(100%);
             transition: transform 0.3s ease-in-out;
         }
-        .cart-sidebar.open {
-            transform: translateX(0);
-        }
+        .cart-sidebar.open { transform: translateX(0); }
         .cart-overlay {
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease-in-out;
         }
-        .cart-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
-        .food-card:hover .food-image {
-            transform: scale(1.05);
-        }
-        .food-image {
-            transition: transform 0.3s ease;
-        }
+        .cart-overlay.open { opacity: 1; visibility: visible; }
+        .food-card:hover .food-image { transform: scale(1.05); }
+        .food-image { transition: transform 0.3s ease; }
         .btn-primary {
             background: linear-gradient(135deg, #E07B39 0%, #D4653E 100%);
             transition: all 0.3s ease;
@@ -66,9 +53,7 @@
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(224, 123, 57, 0.3);
         }
-        .nav-link {
-            position: relative;
-        }
+        .nav-link { position: relative; cursor: pointer; }
         .nav-link::after {
             content: '';
             position: absolute;
@@ -79,45 +64,31 @@
             background: #E07B39;
             transition: width 0.3s ease;
         }
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-        .quantity-btn {
-            transition: all 0.2s ease;
-        }
-        .quantity-btn:hover {
-            background-color: #E07B39;
-            color: white;
-        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .quantity-btn { transition: all 0.2s ease; }
+        .quantity-btn:hover { background-color: #E07B39; color: white; }
         .toast {
             transform: translateY(100px);
             opacity: 0;
             transition: all 0.3s ease;
         }
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .page-section {
-            display: none;
-        }
-        .page-section.active {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .page-section { display: none; }
+        .page-section.active { display: block; animation: fadeIn 0.4s ease; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .menu-tab.active { background: #E07B39 !important; color: white !important; }
     </style>
 </head>
 <body class="bg-soft-cream text-warm-brown">
+
     <!-- Navigation -->
-    <nav class="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50">
+    <nav class="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <div class="flex items-center cursor-pointer" onclick="navigateTo('home')">
+                <div class="flex items-center cursor-pointer" onclick="navigateTo('home', this)">
                     <div class="w-12 h-12 bg-gradient-to-br from-warm-orange to-warm-coral rounded-full flex items-center justify-center mr-3">
                         <i class="fas fa-utensils text-white text-xl"></i>
                     </div>
@@ -128,10 +99,10 @@
                 </div>
 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a onclick="navigateTo('home')" class="nav-link active cursor-pointer text-warm-brown hover:text-warm-orange font-medium">Home</a>
-                    <a onclick="navigateTo('menu')" class="nav-link cursor-pointer text-warm-brown hover:text-warm-orange font-medium">Menu</a>
-                    <a onclick="navigateTo('about')" class="nav-link cursor-pointer text-warm-brown hover:text-warm-orange font-medium">About Us</a>
-                    <a onclick="navigateTo('contact')" class="nav-link cursor-pointer text-warm-brown hover:text-warm-orange font-medium">Contact</a>
+                    <a onclick="navigateTo('home', this)" class="nav-link active text-warm-brown hover:text-warm-orange font-medium">Home</a>
+                    <a onclick="navigateTo('menu', this)" class="nav-link text-warm-brown hover:text-warm-orange font-medium">Menu</a>
+                    <a onclick="navigateTo('about', this)" class="nav-link text-warm-brown hover:text-warm-orange font-medium">About Us</a>
+                    <a onclick="navigateTo('contact', this)" class="nav-link text-warm-brown hover:text-warm-orange font-medium">Contact</a>
                 </div>
 
                 <div class="flex items-center space-x-4">
@@ -149,10 +120,10 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
             <div class="px-4 py-3 space-y-2">
-                <a onclick="navigateTo('home')" class="block py-2 text-warm-brown hover:text-warm-orange font-medium">Home</a>
-                <a onclick="navigateTo('menu')" class="block py-2 text-warm-brown hover:text-warm-orange font-medium">Menu</a>
-                <a onclick="navigateTo('about')" class="block py-2 text-warm-brown hover:text-warm-orange font-medium">About Us</a>
-                <a onclick="navigateTo('contact')" class="block py-2 text-warm-brown hover:text-warm-orange font-medium">Contact</a>
+                <a onclick="navigateTo('home', this)" class="block py-2 text-warm-brown hover:text-warm-orange font-medium">Home</a>
+                <a onclick="navigateTo('menu', this)" class="block py-2 text-warm-brown hover:text-warm-orange font-medium">Menu</a>
+                <a onclick="navigateTo('about', this)" class="block py-2 text-warm-brown hover:text-warm-orange font-medium">About Us</a>
+                <a onclick="navigateTo('contact', this)" class="block py-2 text-warm-brown hover:text-warm-orange font-medium">Contact</a>
             </div>
         </div>
     </nav>
@@ -172,11 +143,7 @@
         </div>
 
         <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
-            <div class="text-center py-12 text-gray-400">
-                <i class="fas fa-shopping-basket text-6xl mb-4 opacity-30"></i>
-                <p class="text-lg">Your cart is empty</p>
-                <p class="text-sm mt-2">Add some delicious items!</p>
-            </div>
+            <!-- Cart items injected here -->
         </div>
 
         <div class="border-t p-6 bg-soft-cream">
@@ -220,10 +187,10 @@
                     Authentic flavors, traditional recipes, and warm hospitality. Experience the best of Nigerian cuisine delivered to your doorstep.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="navigateTo('menu')" class="btn-primary text-white px-8 py-4 rounded-full font-bold text-lg">
+                    <button onclick="navigateTo('menu', document.querySelectorAll('.nav-link')[1])" class="btn-primary text-white px-8 py-4 rounded-full font-bold text-lg">
                         Order Now <i class="fas fa-arrow-right ml-2"></i>
                     </button>
-                    <button onclick="navigateTo('about')" class="bg-white/20 backdrop-blur-md text-white border-2 border-white/30 px-8 py-4 rounded-full font-bold text-lg hover:bg-white/30 transition-all">
+                    <button onclick="navigateTo('about', document.querySelectorAll('.nav-link')[2])" class="bg-white/20 backdrop-blur-md text-white border-2 border-white/30 px-8 py-4 rounded-full font-bold text-lg hover:bg-white/30 transition-all">
                         Our Story
                     </button>
                 </div>
@@ -234,7 +201,7 @@
         <div class="py-20 px-4 max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="font-display text-4xl font-bold text-deep-brown mb-4">Popular Dishes</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Discover our customers' favorite meals, crafted with love and authentic spices</p>
+                <p class="text-gray-600 max-w-2xl mx-auto">Discover our customers' favorite meals</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
@@ -263,7 +230,7 @@
                             <h3 class="font-display text-xl font-bold text-deep-brown">Pounded Yam & Egusi</h3>
                             <span class="text-warm-orange font-bold text-xl">₦4,000</span>
                         </div>
-                        <p class="text-gray-600 text-sm mb-4">Smooth pounded yam with rich egusi soup and assorted meat</p>
+                        <p class="text-gray-600 text-sm mb-4">Smooth pounded yam with rich egusi soup</p>
                         <button class="w-full bg-warm-orange/10 text-warm-orange font-bold py-2 rounded-lg hover:bg-warm-orange hover:text-white transition-all">
                             Add to Cart
                         </button>
@@ -279,7 +246,7 @@
                             <h3 class="font-display text-xl font-bold text-deep-brown">Suya Platter</h3>
                             <span class="text-warm-orange font-bold text-xl">₦3,000</span>
                         </div>
-                        <p class="text-gray-600 text-sm mb-4">Spicy grilled beef skewers with onions and pepper sauce</p>
+                        <p class="text-gray-600 text-sm mb-4">Spicy grilled beef skewers with pepper sauce</p>
                         <button class="w-full bg-warm-orange/10 text-warm-orange font-bold py-2 rounded-lg hover:bg-warm-orange hover:text-white transition-all">
                             Add to Cart
                         </button>
@@ -300,28 +267,28 @@
                             <i class="fas fa-fire text-2xl text-warm-orange"></i>
                         </div>
                         <h3 class="font-bold text-deep-brown mb-2">Authentic Recipes</h3>
-                        <p class="text-gray-600 text-sm">Traditional family recipes passed down generations</p>
+                        <p class="text-gray-600 text-sm">Traditional family recipes</p>
                     </div>
                     <div class="text-center">
                         <div class="w-16 h-16 bg-warm-orange/20 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-leaf text-2xl text-warm-orange"></i>
                         </div>
                         <h3 class="font-bold text-deep-brown mb-2">Fresh Ingredients</h3>
-                        <p class="text-gray-600 text-sm">Locally sourced, premium quality ingredients daily</p>
+                        <p class="text-gray-600 text-sm">Locally sourced daily</p>
                     </div>
                     <div class="text-center">
                         <div class="w-16 h-16 bg-warm-orange/20 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-shipping-fast text-2xl text-warm-orange"></i>
                         </div>
                         <h3 class="font-bold text-deep-brown mb-2">Fast Delivery</h3>
-                        <p class="text-gray-600 text-sm">Hot and fresh delivered to your door in 30 mins</p>
+                        <p class="text-gray-600 text-sm">Delivered in 30 mins</p>
                     </div>
                     <div class="text-center">
                         <div class="w-16 h-16 bg-warm-orange/20 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-heart text-2xl text-warm-orange"></i>
                         </div>
                         <h3 class="font-bold text-deep-brown mb-2">Made with Love</h3>
-                        <p class="text-gray-600 text-sm">Every dish prepared with passion and care</p>
+                        <p class="text-gray-600 text-sm">Every dish with passion</p>
                     </div>
                 </div>
             </div>
@@ -340,12 +307,12 @@
         <div class="max-w-7xl mx-auto px-4 py-12">
             <!-- Category Tabs -->
             <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button onclick="filterMenu('all')" class="menu-tab active px-6 py-2 rounded-full font-medium bg-warm-orange text-white" data-category="all">All</button>
-                <button onclick="filterMenu('rice')" class="menu-tab px-6 py-2 rounded-full font-medium bg-gray-200 text-gray-700 hover:bg-warm-orange hover:text-white transition-all" data-category="rice">Rice Dishes</button>
-                <button onclick="filterMenu('swallow')" class="menu-tab px-6 py-2 rounded-full font-medium bg-gray-200 text-gray-700 hover:bg-warm-orange hover:text-white transition-all" data-category="swallow">Swallows</button>
-                <button onclick="filterMenu('soups')" class="menu-tab px-6 py-2 rounded-full font-medium bg-gray-200 text-gray-700 hover:bg-warm-orange hover:text-white transition-all" data-category="soups">Soups</button>
-                <button onclick="filterMenu('grills')" class="menu-tab px-6 py-2 rounded-full font-medium bg-gray-200 text-gray-700 hover:bg-warm-orange hover:text-white transition-all" data-category="grills">Grills</button>
-                <button onclick="filterMenu('snacks')" class="menu-tab px-6 py-2 rounded-full font-medium bg-gray-200 text-gray-700 hover:bg-warm-orange hover:text-white transition-all" data-category="snacks">Snacks</button>
+                <button onclick="filterMenu('all', this)" class="menu-tab active px-6 py-2 rounded-full font-medium bg-warm-orange text-white" data-category="all">All</button>
+                <button onclick="filterMenu('rice', this)" class="menu-tab px-6 py-2 rounded-full font-medium bg-gray-200 text-gray-700 hover:bg-warm-orange hover:text-white transition-all" data-category="rice">Rice Dishes</button>
+                <button onclick="filterMenu('swallow', this)" class="menu-tab px-6 py-2 rounded-full font-medium bg-gray-200 text-gray-700 hover:bg-warm-orange hover:text-white transition-all" data-category="swallow">Swallows</button>
+                <button onclick="filterMenu('soups', this)" class="menu-tab px-6 py-2 rounded-full font-medium bg-gray-200 text-gray-700 hover:bg-warm-orange hover:text-white transition-all" data-category="soups">Soups</button>
+                <button onclick="filterMenu('grills', this)" class="menu-tab px-6 py-2 rounded-full font-medium bg-gray-200 text-gray-700 hover:bg-warm-orange hover:text-white transition-all" data-category="grills">Grills</button>
+                <button onclick="filterMenu('snacks', this)" class="menu-tab px-6 py-2 rounded-full font-medium bg-gray-200 text-gray-700 hover:bg-warm-orange hover:text-white transition-all" data-category="snacks">Snacks</button>
             </div>
 
             <!-- Menu Grid -->
@@ -381,24 +348,6 @@
                             </div>
                             <p class="text-gray-600 text-sm mb-4">Mixed vegetables with choice of protein</p>
                             <button onclick="addToCart('Nigerian Fried Rice', 2800, 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400')" class="w-full bg-warm-orange text-white font-bold py-3 rounded-lg hover:bg-warm-coral transition-all">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-item" data-category="rice">
-                    <div class="food-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                        <div class="h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1596560548464-f010549b84d7?w=400" alt="Coconut Rice" class="food-image w-full h-full object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="font-display text-xl font-bold text-deep-brown">Coconut Rice</h3>
-                                <span class="text-warm-orange font-bold text-xl">₦3,000</span>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-4">Fragrant coconut milk rice with shrimp</p>
-                            <button onclick="addToCart('Coconut Rice', 3000, 'https://images.unsplash.com/photo-1596560548464-f010549b84d7?w=400')" class="w-full bg-warm-orange text-white font-bold py-3 rounded-lg hover:bg-warm-coral transition-all">
                                 Add to Cart
                             </button>
                         </div>
@@ -442,24 +391,6 @@
                     </div>
                 </div>
 
-                <div class="menu-item" data-category="swallow">
-                    <div class="food-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                        <div class="h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400" alt="Eba" class="food-image w-full h-full object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="font-display text-xl font-bold text-deep-brown">Eba (Garri)</h3>
-                                <span class="text-warm-orange font-bold text-xl">₦1,000</span>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-4">Cassava flakes swallow (Yellow or White)</p>
-                            <button onclick="addToCart('Eba', 1000, 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400')" class="w-full bg-warm-orange text-white font-bold py-3 rounded-lg hover:bg-warm-coral transition-all">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Soups -->
                 <div class="menu-item" data-category="soups">
                     <div class="food-card bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -471,44 +402,8 @@
                                 <h3 class="font-display text-xl font-bold text-deep-brown">Egusi Soup</h3>
                                 <span class="text-warm-orange font-bold text-xl">₦2,500</span>
                             </div>
-                            <p class="text-gray-600 text-sm mb-4">Melon seed soup with assorted meat and fish</p>
+                            <p class="text-gray-600 text-sm mb-4">Melon seed soup with assorted meat</p>
                             <button onclick="addToCart('Egusi Soup', 2500, 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400')" class="w-full bg-warm-orange text-white font-bold py-3 rounded-lg hover:bg-warm-coral transition-all">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-item" data-category="soups">
-                    <div class="food-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                        <div class="h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400" alt="Ogbono" class="food-image w-full h-full object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="font-display text-xl font-bold text-deep-brown">Ogbono Soup</h3>
-                                <span class="text-warm-orange font-bold text-xl">₦2,800</span>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-4">Draw soup with bush mango seeds</p>
-                            <button onclick="addToCart('Ogbono Soup', 2800, 'https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400')" class="w-full bg-warm-orange text-white font-bold py-3 rounded-lg hover:bg-warm-coral transition-all">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-item" data-category="soups">
-                    <div class="food-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                        <div class="h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400" alt="Efo Riro" class="food-image w-full h-full object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="font-display text-xl font-bold text-deep-brown">Efo Riro</h3>
-                                <span class="text-warm-orange font-bold text-xl">₦2,200</span>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-4">Vegetable soup with palm oil and locust beans</p>
-                            <button onclick="addToCart('Efo Riro', 2200, 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400')" class="w-full bg-warm-orange text-white font-bold py-3 rounded-lg hover:bg-warm-coral transition-all">
                                 Add to Cart
                             </button>
                         </div>
@@ -534,42 +429,6 @@
                     </div>
                 </div>
 
-                <div class="menu-item" data-category="grills">
-                    <div class="food-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                        <div class="h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400" alt="Chicken" class="food-image w-full h-full object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="font-display text-xl font-bold text-deep-brown">Grilled Chicken</h3>
-                                <span class="text-warm-orange font-bold text-xl">₦3,500</span>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-4">Whole grilled chicken with herbs and spices</p>
-                            <button onclick="addToCart('Grilled Chicken', 3500, 'https://images.unsplash.com/photo-1544025162-d76694265947?w=400')" class="w-full bg-warm-orange text-white font-bold py-3 rounded-lg hover:bg-warm-coral transition-all">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-item" data-category="grills">
-                    <div class="food-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                        <div class="h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=400" alt="Fish" class="food-image w-full h-full object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="font-display text-xl font-bold text-deep-brown">Grilled Fish</h3>
-                                <span class="text-warm-orange font-bold text-xl">₦4,500</span>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-4">Whole croaker fish with pepper sauce</p>
-                            <button onclick="addToCart('Grilled Fish', 4500, 'https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=400')" class="w-full bg-warm-orange text-white font-bold py-3 rounded-lg hover:bg-warm-coral transition-all">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Snacks -->
                 <div class="menu-item" data-category="snacks">
                     <div class="food-card bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -588,42 +447,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="menu-item" data-category="snacks">
-                    <div class="food-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                        <div class="h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400" alt="Puff Puff" class="food-image w-full h-full object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="font-display text-xl font-bold text-deep-brown">Puff Puff (5pcs)</h3>
-                                <span class="text-warm-orange font-bold text-xl">₦500</span>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-4">Sweet fried dough balls</p>
-                            <button onclick="addToCart('Puff Puff', 500, 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400')" class="w-full bg-warm-orange text-white font-bold py-3 rounded-lg hover:bg-warm-coral transition-all">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-item" data-category="snacks">
-                    <div class="food-card bg-white rounded-2xl shadow-lg overflow-hidden">
-                        <div class="h-48 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400" alt="Chin Chin" class="food-image w-full h-full object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="font-display text-xl font-bold text-deep-brown">Chin Chin Pack</h3>
-                                <span class="text-warm-orange font-bold text-xl">₦1,200</span>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-4">Crunchy fried snack (200g pack)</p>
-                            <button onclick="addToCart('Chin Chin Pack', 1200, 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400')" class="w-full bg-warm-orange text-white font-bold py-3 rounded-lg hover:bg-warm-coral transition-all">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -633,23 +456,15 @@
         <div class="bg-gradient-to-r from-warm-orange to-warm-coral py-16">
             <div class="text-center px-4">
                 <h1 class="font-display text-5xl font-bold text-white mb-4">Our Story</h1>
-                <p class="text-warm-cream text-xl">Meet the family behind The Omo Eaters</p>
             </div>
         </div>
 
         <div class="max-w-7xl mx-auto px-4 py-16">
-            <!-- Story Section -->
             <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
                 <div>
                     <h2 class="font-display text-4xl font-bold text-deep-brown mb-6">From Our Kitchen to Your Heart</h2>
                     <p class="text-gray-600 mb-4 leading-relaxed">
-                        The Omo Eaters was born from a simple dream: to share the rich, comforting flavors of Nigerian home cooking with everyone. What started as small family dinners has grown into a beloved food destination.
-                    </p>
-                    <p class="text-gray-600 mb-4 leading-relaxed">
-                        Every recipe we serve has been passed down through generations, perfected in our family kitchen, and made with the same love we give our own children. "Omo" means child in Yoruba, and we treat every customer like family.
-                    </p>
-                    <p class="text-gray-600 leading-relaxed">
-                        We believe that good food brings people together, and we're honored to be part of your family's mealtime memories.
+                        The Omo Eaters was born from a simple dream: to share the rich, comforting flavors of Nigerian home cooking with everyone.
                     </p>
                 </div>
                 <div class="relative">
@@ -658,78 +473,26 @@
                 </div>
             </div>
 
-            <!-- Owners Section -->
+            <!-- Owners -->
             <div class="bg-warm-cream rounded-3xl p-12 mb-20">
                 <div class="text-center mb-12">
                     <h2 class="font-display text-4xl font-bold text-deep-brown mb-4">Meet the Owners</h2>
-                    <p class="text-gray-600">The passionate duo behind your favorite meals</p>
                 </div>
-
                 <div class="grid md:grid-cols-2 gap-12">
-                    <!-- Ilenaye Osborne -->
                     <div class="bg-white rounded-2xl p-8 shadow-lg text-center">
                         <div class="w-32 h-32 bg-gradient-to-br from-warm-orange to-warm-coral rounded-full flex items-center justify-center mx-auto mb-6">
                             <i class="fas fa-user text-5xl text-white"></i>
                         </div>
                         <h3 class="font-display text-2xl font-bold text-deep-brown mb-2">Ilenaye Osborne</h3>
                         <p class="text-warm-orange font-medium mb-4">Co-Founder & Head Chef</p>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            With over 15 years of culinary experience, Ilenaye brings authentic Nigerian flavors to every dish. Her secret? "Cook with your heart, and every meal becomes a celebration."
-                        </p>
-                        <div class="flex justify-center space-x-4 mt-6">
-                            <a href="#" class="w-10 h-10 bg-warm-orange/10 rounded-full flex items-center justify-center text-warm-orange hover:bg-warm-orange hover:text-white transition-all">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 bg-warm-orange/10 rounded-full flex items-center justify-center text-warm-orange hover:bg-warm-orange hover:text-white transition-all">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </div>
                     </div>
-
-                    <!-- Juwon Ilenaye -->
                     <div class="bg-white rounded-2xl p-8 shadow-lg text-center">
                         <div class="w-32 h-32 bg-gradient-to-br from-warm-coral to-warm-red rounded-full flex items-center justify-center mx-auto mb-6">
                             <i class="fas fa-user text-5xl text-white"></i>
                         </div>
                         <h3 class="font-display text-2xl font-bold text-deep-brown mb-2">Juwon Ilenaye</h3>
                         <p class="text-warm-orange font-medium mb-4">Co-Founder & Operations Director</p>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Juwon ensures every order reaches you fresh and on time. His attention to detail and customer service excellence has made The Omo Eaters a trusted name in food delivery.
-                        </p>
-                        <div class="flex justify-center space-x-4 mt-6">
-                            <a href="#" class="w-10 h-10 bg-warm-orange/10 rounded-full flex items-center justify-center text-warm-orange hover:bg-warm-orange hover:text-white transition-all">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 bg-warm-orange/10 rounded-full flex items-center justify-center text-warm-orange hover:bg-warm-orange hover:text-white transition-all">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                        </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Values -->
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center p-6">
-                    <div class="w-16 h-16 bg-warm-orange/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-award text-3xl text-warm-orange"></i>
-                    </div>
-                    <h3 class="font-bold text-deep-brown text-xl mb-2">Quality First</h3>
-                    <p class="text-gray-600">Only the freshest ingredients make it to your plate</p>
-                </div>
-                <div class="text-center p-6">
-                    <div class="w-16 h-16 bg-warm-orange/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-users text-3xl text-warm-orange"></i>
-                    </div>
-                    <h3 class="font-bold text-deep-brown text-xl mb-2">Family Values</h3>
-                    <p class="text-gray-600">Treating every customer like one of our own</p>
-                </div>
-                <div class="text-center p-6">
-                    <div class="w-16 h-16 bg-warm-orange/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-seedling text-3xl text-warm-orange"></i>
-                    </div>
-                    <h3 class="font-bold text-deep-brown text-xl mb-2">Community Support</h3>
-                    <p class="text-gray-600">Sourcing locally and giving back to our community</p>
                 </div>
             </div>
         </div>
@@ -740,38 +503,23 @@
         <div class="bg-gradient-to-r from-warm-orange to-warm-coral py-16">
             <div class="text-center px-4">
                 <h1 class="font-display text-5xl font-bold text-white mb-4">Get in Touch</h1>
-                <p class="text-warm-cream text-xl">We'd love to hear from you</p>
             </div>
         </div>
 
         <div class="max-w-7xl mx-auto px-4 py-16">
             <div class="grid md:grid-cols-2 gap-12">
-                <!-- Contact Info -->
                 <div>
                     <h2 class="font-display text-3xl font-bold text-deep-brown mb-8">Contact Information</h2>
-
                     <div class="space-y-6">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-warm-orange/20 rounded-full flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-map-marker-alt text-warm-orange text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-deep-brown mb-1">Visit Us</h3>
-                                <p class="text-gray-600">123 Lagos Street, Victoria Island<br>Lagos, Nigeria</p>
-                            </div>
-                        </div>
-
                         <div class="flex items-start space-x-4">
                             <div class="w-12 h-12 bg-warm-orange/20 rounded-full flex items-center justify-center flex-shrink-0">
                                 <i class="fas fa-phone text-warm-orange text-xl"></i>
                             </div>
                             <div>
                                 <h3 class="font-bold text-deep-brown mb-1">Call Us</h3>
-                                <p class="text-gray-600">+234 814 300 2152</p>
-                                <p class="text-sm text-gray-500">Mon-Sun: 8am - 10pm</p>
+                                <p class="text-gray-600">08143002152</p>
                             </div>
                         </div>
-
                         <div class="flex items-start space-x-4">
                             <div class="w-12 h-12 bg-warm-orange/20 rounded-full flex items-center justify-center flex-shrink-0">
                                 <i class="fas fa-envelope text-warm-orange text-xl"></i>
@@ -779,66 +527,32 @@
                             <div>
                                 <h3 class="font-bold text-deep-brown mb-1">Email Us</h3>
                                 <p class="text-gray-600">playerd645@gmail.com</p>
-                                <p class="text-sm text-gray-500">We reply within 24 hours</p>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Social Media -->
-                    <div class="mt-12">
-                        <h3 class="font-bold text-deep-brown mb-4">Follow Us</h3>
-                        <div class="flex space-x-4">
-                            <a href="#" class="w-12 h-12 bg-warm-orange text-white rounded-full flex items-center justify-center hover:bg-warm-coral transition-all">
-                                <i class="fab fa-facebook-f text-xl"></i>
-                            </a>
-                            <a href="#" class="w-12 h-12 bg-warm-orange text-white rounded-full flex items-center justify-center hover:bg-warm-coral transition-all">
-                                <i class="fab fa-instagram text-xl"></i>
-                            </a>
-                            <a href="#" class="w-12 h-12 bg-warm-orange text-white rounded-full flex items-center justify-center hover:bg-warm-coral transition-all">
-                                <i class="fab fa-twitter text-xl"></i>
-                            </a>
-                            <a href="#" class="w-12 h-12 bg-warm-orange text-white rounded-full flex items-center justify-center hover:bg-warm-coral transition-all">
-                                <i class="fab fa-whatsapp text-xl"></i>
-                            </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Contact Form -->
                 <div class="bg-white rounded-2xl shadow-lg p-8">
                     <h2 class="font-display text-2xl font-bold text-deep-brown mb-6">Send us a Message</h2>
                     <form onsubmit="handleContactSubmit(event)">
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
-                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-warm-orange focus:ring-2 focus:ring-warm-orange/20 outline-none transition-all" placeholder="John Doe">
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-warm-orange focus:ring-2 focus:ring-warm-orange/20 outline-none" placeholder="John Doe">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                                <input type="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-warm-orange focus:ring-2 focus:ring-warm-orange/20 outline-none transition-all" placeholder="john@example.com">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                                <input type="tel" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-warm-orange focus:ring-2 focus:ring-warm-orange/20 outline-none transition-all" placeholder="+234 800 000 0000">
+                                <input type="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-warm-orange focus:ring-2 focus:ring-warm-orange/20 outline-none" placeholder="john@example.com">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                                <textarea rows="4" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-warm-orange focus:ring-2 focus:ring-warm-orange/20 outline-none transition-all resize-none" placeholder="How can we help you?"></textarea>
+                                <textarea rows="4" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-warm-orange focus:ring-2 focus:ring-warm-orange/20 outline-none resize-none" placeholder="How can we help you?"></textarea>
                             </div>
                             <button type="submit" class="w-full btn-primary text-white font-bold py-4 rounded-lg text-lg">
                                 Send Message <i class="fas fa-paper-plane ml-2"></i>
                             </button>
                         </div>
                     </form>
-                </div>
-            </div>
-
-            <!-- Map Placeholder -->
-            <div class="mt-16 bg-warm-cream rounded-2xl p-4 h-96 flex items-center justify-center">
-                <div class="text-center">
-                    <i class="fas fa-map-marked-alt text-6xl text-warm-orange/30 mb-4"></i>
-                    <p class="text-gray-500">Interactive Map Would Be Here</p>
-                    <p class="text-sm text-gray-400 mt-2">Victoria Island, Lagos, Nigeria</p>
                 </div>
             </div>
         </div>
@@ -849,59 +563,38 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid md:grid-cols-4 gap-8 mb-12">
                 <div>
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-warm-orange rounded-full flex items-center justify-center mr-3">
-                            <i class="fas fa-utensils text-white"></i>
-                        </div>
-                        <h3 class="font-display text-xl font-bold">The Omo Eaters</h3>
-                    </div>
-                    <p class="text-sm text-gray-400 mb-4">Bringing the authentic taste of Nigeria to your doorstep. Every meal is a celebration of flavor and tradition.</p>
+                    <h3 class="font-display text-xl font-bold mb-4">The Omo Eaters</h3>
+                    <p class="text-sm text-gray-400">Authentic Nigerian cuisine delivered to your doorstep.</p>
                 </div>
-
                 <div>
                     <h4 class="font-bold text-white mb-4">Quick Links</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a onclick="navigateTo('home')" class="hover:text-warm-orange cursor-pointer transition-colors">Home</a></li>
-                        <li><a onclick="navigateTo('menu')" class="hover:text-warm-orange cursor-pointer transition-colors">Menu</a></li>
-                        <li><a onclick="navigateTo('about')" class="hover:text-warm-orange cursor-pointer transition-colors">About Us</a></li>
-                        <li><a onclick="navigateTo('contact')" class="hover:text-warm-orange cursor-pointer transition-colors">Contact</a></li>
+                        <li><a onclick="navigateTo('home', document.querySelector('.nav-link'))" class="hover:text-warm-orange cursor-pointer transition-colors">Home</a></li>
+                        <li><a onclick="navigateTo('menu', document.querySelectorAll('.nav-link')[1])" class="hover:text-warm-orange cursor-pointer transition-colors">Menu</a></li>
+                        <li><a onclick="navigateTo('about', document.querySelectorAll('.nav-link')[2])" class="hover:text-warm-orange cursor-pointer transition-colors">About Us</a></li>
+                        <li><a onclick="navigateTo('contact', document.querySelectorAll('.nav-link')[3])" class="hover:text-warm-orange cursor-pointer transition-colors">Contact</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h4 class="font-bold text-white mb-4">Contact</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
                         <li><i class="fas fa-phone mr-2 text-warm-orange"></i> 08143002152</li>
                         <li><i class="fas fa-envelope mr-2 text-warm-orange"></i> playerd645@gmail.com</li>
-                        <li><i class="fas fa-map-marker-alt mr-2 text-warm-orange"></i> Lagos, Nigeria</li>
                     </ul>
                 </div>
-
-                <div>
-                    <h4 class="font-bold text-white mb-4">Newsletter</h4>
-                    <p class="text-sm text-gray-400 mb-4">Subscribe for special offers and updates</p>
-                    <div class="flex">
-                        <input type="email" placeholder="Your email" class="flex-1 px-4 py-2 rounded-l-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 outline-none focus:border-warm-orange">
-                        <button class="bg-warm-orange px-4 py-2 rounded-r-lg hover:bg-warm-coral transition-colors">
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
             </div>
-
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="border-t border-white/10 pt-8 text-center">
                 <p class="text-sm text-gray-400">&copy; 2026 The Omo Eaters. All rights reserved.</p>
-                <p class="text-sm text-gray-400 mt-2 md:mt-0">Made with <i class="fas fa-heart text-warm-orange mx-1"></i> by Ilenaye & Juwon</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Cart State
-        let cart = [];
+        // Cart State with localStorage
+        let cart = JSON.parse(localStorage.getItem('omoEatersCart')) || [];
 
-        // Navigation
-        function navigateTo(page) {
+        // Navigation - FIXED: Now properly passes the clicked element
+        function navigateTo(page, element) {
             // Hide all sections
             document.querySelectorAll('.page-section').forEach(section => {
                 section.classList.remove('active');
@@ -910,11 +603,15 @@
             // Show selected section
             document.getElementById(page).classList.add('active');
 
-            // Update nav links
+            // Update ALL nav links (desktop and mobile)
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
             });
-            event.target.classList.add('active');
+
+            // Add active class to clicked element
+            if (element) {
+                element.classList.add('active');
+            }
 
             // Close mobile menu
             document.getElementById('mobile-menu').classList.add('hidden');
@@ -943,20 +640,17 @@
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
-                cart.push({
-                    name: name,
-                    price: price,
-                    image: image,
-                    quantity: 1
-                });
+                cart.push({ name, price, image, quantity: 1 });
             }
 
+            saveCart();
             updateCart();
             showToast(`${name} added to cart!`);
         }
 
         function removeFromCart(index) {
             cart.splice(index, 1);
+            saveCart();
             updateCart();
         }
 
@@ -965,8 +659,13 @@
             if (cart[index].quantity <= 0) {
                 removeFromCart(index);
             } else {
+                saveCart();
                 updateCart();
             }
+        }
+
+        function saveCart() {
+            localStorage.setItem('omoEatersCart', JSON.stringify(cart));
         }
 
         function updateCart() {
@@ -975,8 +674,8 @@
             const cartSubtotal = document.getElementById('cart-subtotal');
             const cartTotal = document.getElementById('cart-total');
 
-            // Update count badge
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
             if (totalItems > 0) {
                 cartCount.textContent = totalItems;
                 cartCount.classList.remove('hidden');
@@ -984,7 +683,6 @@
                 cartCount.classList.add('hidden');
             }
 
-            // Update items display
             if (cart.length === 0) {
                 cartItems.innerHTML = `
                     <div class="text-center py-12 text-gray-400">
@@ -1017,7 +715,6 @@
                 `).join('');
             }
 
-            // Update totals
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const deliveryFee = cart.length > 0 ? 500 : 0;
             const total = subtotal + deliveryFee;
@@ -1031,8 +728,14 @@
                 showToast('Your cart is empty!');
                 return;
             }
-            showToast('Proceeding to checkout...');
-            // Here you would typically redirect to a checkout page
+            
+            // Create WhatsApp message
+            const items = cart.map(item => `${item.quantity}x ${item.name} (₦${(item.price * item.quantity).toLocaleString()})`).join('%0A');
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) + 500;
+            const message = `Hello! I'd like to order:%0A%0A${items}%0A%0ADelivery: ₦500%0ATotal: ₦${total.toLocaleString()}`;
+            
+            window.open(`https://wa.me/2348143002152?text=${message}`, '_blank');
+            showToast('Opening WhatsApp...');
         }
 
         function showToast(message) {
@@ -1046,21 +749,25 @@
             }, 3000);
         }
 
-        // Menu Filter
-        function filterMenu(category) {
+        // Menu Filter - FIXED: Now properly receives the clicked element
+        function filterMenu(category, element) {
             // Update tabs
             document.querySelectorAll('.menu-tab').forEach(tab => {
-                tab.classList.remove('active', 'bg-warm-orange', 'text-white');
+                tab.classList.remove('active');
+                tab.classList.remove('bg-warm-orange', 'text-white');
                 tab.classList.add('bg-gray-200', 'text-gray-700');
             });
-            event.target.classList.remove('bg-gray-200', 'text-gray-700');
-            event.target.classList.add('active', 'bg-warm-orange', 'text-white');
+            
+            element.classList.add('active');
+            element.classList.remove('bg-gray-200', 'text-gray-700');
+            element.classList.add('bg-warm-orange', 'text-white');
 
             // Filter items
             const items = document.querySelectorAll('.menu-item');
             items.forEach(item => {
                 if (category === 'all' || item.dataset.category === category) {
                     item.style.display = 'block';
+                    item.style.animation = 'fadeIn 0.4s ease';
                 } else {
                     item.style.display = 'none';
                 }
@@ -1070,13 +777,18 @@
         // Contact Form
         function handleContactSubmit(e) {
             e.preventDefault();
-            showToast('Message sent successfully! We'll get back to you soon.');
+            showToast('Message sent successfully! We\'ll get back to you soon.');
             e.target.reset();
         }
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             updateCart();
+        });
+
+        // Prevent cart from closing when clicking inside sidebar
+        document.getElementById('cart-sidebar').addEventListener('click', function(e) {
+            e.stopPropagation();
         });
     </script>
 </body>
